@@ -2,10 +2,20 @@ import {
   MeshReflectorMaterial,
   PresentationControls,
   Stage,
+  Sky,
+  Environment,
+  useTexture,
 } from "@react-three/drei";
-import Chair from "./Chair";
+
+import Gravestone from "./Gravestone";
 
 const Experience = () => {
+  // const grassTexture = useTexture({
+  //   map: "",
+  //   normalMap: "",
+  //   roughnessMap: "",
+  // });
+
   return (
     <>
       <PresentationControls
@@ -14,12 +24,15 @@ const Experience = () => {
         polar={[-0.1, Math.PI / 4]}
         rotation={[Math.PI / 8, Math.PI / 4, 0]}
       >
-        <Stage environment="city" intensity={0.6} castShadow={false}>
-          <Chair />
+        <Stage environment="park" intensity={0.3}>
+          <Environment preset="park" background blur={0.7} />
+          <Gravestone />
         </Stage>
+        {/* <Sky sunPosition={[100, 20, 100]} /> */}
+        {/* <pointLight castShadow intensity={0.8} position={[100, 100, 100]} /> */}
         <mesh rotation={[-Math.PI / 2, 0, 0]} position-y={-2}>
           <planeGeometry args={[170, 170]} />
-          <MeshReflectorMaterial
+          <meshStandardMaterial
             blur={[300, 100]}
             resolution={2048}
             mixBlur={1}
@@ -28,8 +41,7 @@ const Experience = () => {
             depthScale={1.2}
             minDepthThreshold={0.4}
             maxDepthThreshold={1.4}
-            color="#101010"
-            metalness={0.5}
+            color="#fdfbd3"
           />
         </mesh>
       </PresentationControls>
